@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../App.css";
-import { flags } from "../Flags";
+
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -11,9 +11,7 @@ const SelectedCountry = () => {
   const { countryid } = useParams();
 
   async function goHome() {
-    const resp = await axios.delete(
-      `http://localhost:5105/api/blogs/${countryid}`
-    );
+    await axios.delete(`http://localhost:5105/api/blogs/${countryid}`);
     Navigate("/");
   }
 
@@ -22,15 +20,14 @@ const SelectedCountry = () => {
   }
 
   useEffect(() => {
+    async function fetchCountry() {
+      const resp = await axios.get(
+        `http://localhost:5105/api/blogs/${countryid}`
+      );
+      setData(resp.data);
+    }
     fetchCountry();
-  }, []);
-
-  async function fetchCountry() {
-    const resp = await axios.get(
-      `http://localhost:5105/api/blogs/${countryid}`
-    );
-    setData(resp.data);
-  }
+  }, [countryid]);
 
   return (
     <div className="selectedCountryPage">

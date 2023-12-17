@@ -25,7 +25,7 @@ const Creation = () => {
       description: description,
       imageLink: imageLink,
     };
-    const resp = await axios.post("http://localhost:5105/api/blogs", body);
+    await axios.post("http://localhost:5105/api/blogs", body);
 
     Navigate("/");
   }

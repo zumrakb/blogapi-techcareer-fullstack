@@ -1,6 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { flags } from "../Flags";
+
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
@@ -19,10 +19,7 @@ const EditingCountry = () => {
       description: description,
       imageLink: imageLink,
     };
-    const resp = await axios.put(
-      `http://localhost:5105/api/blogs/${countryid}`,
-      newbody
-    );
+    await axios.put(`http://localhost:5105/api/blogs/${countryid}`, newbody);
     Navigate(`/blog/${countryid}`);
   }
 
@@ -34,18 +31,18 @@ const EditingCountry = () => {
   }
 
   useEffect(() => {
+    async function fetchCountry() {
+      const resp = await axios.get(
+        `http://localhost:5105/api/blogs/${countryid}`
+      );
+      const countryinfo = resp.data;
+      setTitle(countryinfo.title);
+      setDescription(countryinfo.description);
+      setimageLink(countryinfo.imageLink);
+    }
     fetchCountry();
-  }, []);
+  }, [countryid]);
 
-  async function fetchCountry() {
-    const resp = await axios.get(
-      `http://localhost:5105/api/blogs/${countryid}`
-    );
-    const countryinfo = resp.data;
-    setTitle(countryinfo.title);
-    setDescription(countryinfo.description);
-    setimageLink(countryinfo.imageLink);
-  }
   return (
     <div className="editingPage">
       <img className="countryFlag" src={imageLink} alt="flagofcountry" />
