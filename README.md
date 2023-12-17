@@ -1,0 +1,7 @@
+# BLOG PROJECT - TECHCAREER FULLSTACK BOOTCAMP - EĞİTMEN: AHMET KAYA
+
+## Tech Stack
+
+- React JS
+- ASP.NET Web API
+- SQL Server
