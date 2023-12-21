@@ -12,16 +12,7 @@ const EditingCountry = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageLink, setimageLink] = useState("");
-
-  /* async function editingSubmit() {
-    const newbody = {
-      title: title,
-      description: description,
-      imageLink: imageLink,
-    };
-    await axios.put(`http://localhost:5105/api/blogs/${countryid}`, newbody);
-    Navigate(`/blog/${countryid}`);
-  } */
+  const isLogin = localStorage.getItem("token");
 
   async function editingSubmit() {
     try {
@@ -39,11 +30,9 @@ const EditingCountry = () => {
         },
       });
 
-      // Redirect to the edited blog page after successful update
       Navigate(`/blog/${countryid}`);
     } catch (error) {
       console.error("Blog update failed:", error.message);
-      // Handle blog update failure (e.g., show an error message to the user)
     }
   }
   function handleInput(e) {
@@ -54,17 +43,25 @@ const EditingCountry = () => {
   }
 
   useEffect(() => {
-    async function fetchCountry() {
-      const resp = await axios.get(
-        `http://localhost:5105/api/blogs/${countryid}`
-      );
-      const countryinfo = resp.data;
-      setTitle(countryinfo.title);
-      setDescription(countryinfo.description);
-      setimageLink(countryinfo.imageLink);
-    }
-    fetchCountry();
-  }, [countryid]);
+    if (isLogin) {
+      async function fetchCountry() {
+        const token = localStorage.getItem("token");
+        const resp = await axios.get(
+          `http://localhost:5105/api/blogs/${countryid}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        const countryinfo = resp.data;
+        setTitle(countryinfo.title);
+        setDescription(countryinfo.description);
+        setimageLink(countryinfo.imageLink);
+      }
+      fetchCountry();
+    } else Navigate("/login");
+  }, [countryid, isLogin, Navigate]);
 
   return (
     <div className="editingPage">

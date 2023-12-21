@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { flags } from "../Flags";
 import axios from "axios";
@@ -8,6 +8,10 @@ const Creation = () => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageLink, setimageLink] = useState("");
+  const isLogin = localStorage.getItem("token");
+  useEffect(() => {
+    if (!isLogin) Navigate("/login");
+  }, [isLogin, Navigate]);
 
   function handleInput(e) {
     setTitle(e.target.value);
@@ -18,18 +22,6 @@ const Creation = () => {
   function handleImg(link) {
     setimageLink(link);
   }
-
-  /* async function creationSubmit() {
-    const body = {
-      title: title,
-      description: description,
-      imageLink: imageLink,
-    };
-    await axios.post("http://localhost:5105/api/blogs", body);
-
-    Navigate("/");
-  }
- */
 
   async function creationSubmit() {
     try {
@@ -47,11 +39,9 @@ const Creation = () => {
         },
       });
 
-      // Redirect to the home page after successful creation
       Navigate("/");
     } catch (error) {
       console.error("Blog creation failed:", error.message);
-      // Handle blog creation failure (e.g., show an error message to the user)
     }
   }
   return (

@@ -9,11 +9,7 @@ const SelectedCountry = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState({});
   const { countryid } = useParams();
-
-  /* async function goHome() {
-    await axios.delete(`http://localhost:5105/api/blogs/${countryid}`);
-    Navigate("/");
-  } */
+  const isLogin = localStorage.getItem("token");
 
   async function goHome() {
     try {
@@ -25,11 +21,9 @@ const SelectedCountry = () => {
         },
       });
 
-      // Redirect to the home page after successful deletion
       Navigate("/");
     } catch (error) {
       console.error("Blog deletion failed:", error.message);
-      // Handle blog deletion failure (e.g., show an error message to the user)
     }
   }
 
@@ -38,14 +32,23 @@ const SelectedCountry = () => {
   }
 
   useEffect(() => {
-    async function fetchCountry() {
-      const resp = await axios.get(
-        `http://localhost:5105/api/blogs/${countryid}`
-      );
-      setData(resp.data);
-    }
-    fetchCountry();
-  }, [countryid]);
+    if (isLogin) {
+      async function fetchCountry() {
+        const token = localStorage.getItem("token");
+
+        const resp = await axios.get(
+          `http://localhost:5105/api/blogs/${countryid}`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        setData(resp.data);
+      }
+      fetchCountry();
+    } else Navigate("/login");
+  }, [countryid, isLogin, Navigate]);
 
   return (
     <div className="selectedCountryPage">

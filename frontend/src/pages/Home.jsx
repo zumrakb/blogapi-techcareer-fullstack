@@ -7,20 +7,33 @@ import axios from "axios";
 const Home = () => {
   const Navigate = useNavigate();
   const [data, setData] = useState([]);
-  //communication frontend backend
+  const [isLogin, setLogin] = useState(localStorage.getItem("token"));
   useEffect(() => {
-    fetchCountries();
-  }, []);
+    console.log(isLogin);
+
+    if (isLogin) fetchCountries();
+    else Navigate("/login");
+  }, [isLogin, Navigate]);
 
   async function fetchCountries() {
-    const resp = await axios.get("http://localhost:5105/api/blogs");
+    const token = localStorage.getItem("token");
+    const authString = `Bearer ${token}`;
+
+    const resp = await axios.get("http://localhost:5105/api/blogs", {
+      headers: {
+        Authorization: authString,
+      },
+    });
+    console.log(resp.data);
     setData(resp.data);
   }
 
   function createButton() {
     Navigate("/create");
   }
-  function goToLogInPage() {
+  function logout() {
+    localStorage.removeItem("token");
+    setLogin(false);
     Navigate("/login");
   }
 
@@ -35,6 +48,7 @@ const Home = () => {
                 index={d.id}
                 imageLink={d.imageLink}
                 title={d.title}
+                createdBy={d.createdBy.name}
               />
             );
           })}
@@ -46,8 +60,8 @@ const Home = () => {
         <button className="homePageButton" onClick={createButton}>
           Create Country
         </button>
-        <button className="homePageButton" onClick={goToLogInPage}>
-          Sign Up / Log In
+        <button className="homePageButton" onClick={logout}>
+          Logout
         </button>
       </div>
     </div>

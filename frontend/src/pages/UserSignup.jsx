@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
 
 const SignupPage = () => {
+  const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [secondpassword, setsecondPassword] = useState("");
@@ -13,34 +14,41 @@ const SignupPage = () => {
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleRepeatPasswordChange = (e) => setsecondPassword(e.target.value);
-
-  /*  function handleSignup() {
-    Navigate("/");
-  } */
+  const handleName = (e) => setName(e.target.value);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) Navigate("/");
+  }, [Navigate]);
   async function handleSignup() {
     try {
-      // Check if passwords match
       if (password !== secondpassword) {
-        // Handle password mismatch (e.g., show an error message to the user)
         console.error("Passwords do not match");
         return;
       }
 
-      const response = await axios.post("http://localhost:5105/signup", {
+      await axios.post("http://localhost:5105/signup", {
         email: username,
         password: password,
+        name: name,
       });
 
-      // Redirect to the home page or login page after successful signup
-      Navigate("/");
+      Navigate("/login");
     } catch (error) {
       console.error("Signup failed:", error.message);
-      // Handle signup failure (e.g., show an error message to the user)
     }
   }
 
   return (
     <div className="userloginpage">
+      <div className="labelinput">
+        <label>Full Name</label>
+        <input
+          className="userinput"
+          type="text"
+          value={name}
+          onChange={handleName}
+        />
+      </div>
       <div className="labelinput">
         <label>Username/Email:</label>
         <input

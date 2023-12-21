@@ -9,8 +9,15 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import UserLogin from "./pages/UserLogin";
 import UserSignup from "./pages/UserSignup";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      console.log("hello");
+    }
+  }, []);
   return (
     <>
       <Navbar />
