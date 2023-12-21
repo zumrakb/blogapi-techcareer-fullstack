@@ -19,7 +19,7 @@ const Creation = () => {
     setimageLink(link);
   }
 
-  async function creationSubmit() {
+  /* async function creationSubmit() {
     const body = {
       title: title,
       description: description,
@@ -29,7 +29,31 @@ const Creation = () => {
 
     Navigate("/");
   }
+ */
 
+  async function creationSubmit() {
+    try {
+      const body = {
+        title: title,
+        description: description,
+        imageLink: imageLink,
+      };
+
+      const token = localStorage.getItem("token");
+
+      await axios.post("http://localhost:5105/api/blogs", body, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Redirect to the home page after successful creation
+      Navigate("/");
+    } catch (error) {
+      console.error("Blog creation failed:", error.message);
+      // Handle blog creation failure (e.g., show an error message to the user)
+    }
+  }
   return (
     <div className="creationPage">
       <div className="flagList">
@@ -37,7 +61,8 @@ const Creation = () => {
           <img
             key={id}
             style={{
-              border: imageLink === flag.link ? "1px solid blue" : "none",
+              border: imageLink === flag.link ? "1px solid #3498db" : "none",
+              borderRadius: "8px",
             }}
             onClick={() => {
               handleImg(flag.link);

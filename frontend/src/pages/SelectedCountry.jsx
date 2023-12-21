@@ -10,9 +10,27 @@ const SelectedCountry = () => {
   const [data, setData] = useState({});
   const { countryid } = useParams();
 
-  async function goHome() {
+  /* async function goHome() {
     await axios.delete(`http://localhost:5105/api/blogs/${countryid}`);
     Navigate("/");
+  } */
+
+  async function goHome() {
+    try {
+      const token = localStorage.getItem("token");
+
+      await axios.delete(`http://localhost:5105/api/blogs/${countryid}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Redirect to the home page after successful deletion
+      Navigate("/");
+    } catch (error) {
+      console.error("Blog deletion failed:", error.message);
+      // Handle blog deletion failure (e.g., show an error message to the user)
+    }
   }
 
   function goEditingCountry() {

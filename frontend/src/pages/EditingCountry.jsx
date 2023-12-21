@@ -13,7 +13,7 @@ const EditingCountry = () => {
   const [description, setDescription] = useState("");
   const [imageLink, setimageLink] = useState("");
 
-  async function editingSubmit() {
+  /* async function editingSubmit() {
     const newbody = {
       title: title,
       description: description,
@@ -21,8 +21,31 @@ const EditingCountry = () => {
     };
     await axios.put(`http://localhost:5105/api/blogs/${countryid}`, newbody);
     Navigate(`/blog/${countryid}`);
-  }
+  } */
 
+  async function editingSubmit() {
+    try {
+      const newbody = {
+        title: title,
+        description: description,
+        imageLink: imageLink,
+      };
+
+      const token = localStorage.getItem("token");
+
+      await axios.put(`http://localhost:5105/api/blogs/${countryid}`, newbody, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      // Redirect to the edited blog page after successful update
+      Navigate(`/blog/${countryid}`);
+    } catch (error) {
+      console.error("Blog update failed:", error.message);
+      // Handle blog update failure (e.g., show an error message to the user)
+    }
+  }
   function handleInput(e) {
     setTitle(e.target.value);
   }

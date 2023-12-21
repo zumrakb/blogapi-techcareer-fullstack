@@ -20,6 +20,9 @@ const Home = () => {
   function createButton() {
     Navigate("/create");
   }
+  function goToLogInPage() {
+    Navigate("/login");
+  }
 
   return (
     <div className="homePage">
@@ -39,9 +42,14 @@ const Home = () => {
       ) : (
         <h1 className="message">Create your first blog!</h1>
       )}
-      <button className="homePageButton" onClick={createButton}>
-        Create Country
-      </button>
+      <div className="buttonshome">
+        <button className="homePageButton" onClick={createButton}>
+          Create Country
+        </button>
+        <button className="homePageButton" onClick={goToLogInPage}>
+          Sign Up / Log In
+        </button>
+      </div>
     </div>
   );
 };

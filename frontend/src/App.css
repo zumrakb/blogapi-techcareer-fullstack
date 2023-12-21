@@ -23,7 +23,7 @@ body {
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  min-height: 100%;
+  height: 77vh;
   width: 100%;
   text-align: center;
 }
@@ -290,4 +290,99 @@ footer {
   align-items: center;
   justify-content: center;
   height: 80vh;
+  font-size: 30px;
+  font-family: "Arial", sans-serif;
+  animation: dance 4s infinite;
+  color: #accbe2;
+}
+
+@keyframes dance {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  25% {
+    transform: translateY(-20px) scale(1.2);
+  }
+  50% {
+    transform: translateY(0) scale(1.5);
+  }
+  75% {
+    transform: translateY(-20px) scale(1.2);
+  }
+}
+
+.dancing-text {
+}
+
+/*userloginpage*/
+.buttonshome {
+  display: flex;
+  flex-direction: row;
+}
+
+.userloginpage {
+  height: 77vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.labelinput {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+label {
+  color: #22679c;
+  font-size: 20px;
+}
+
+.creationInput {
+  height: 30px;
+  border: 2px solid #a5d7f9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px azure;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.userinput {
+  width: 400px;
+  min-height: 25px;
+  border: 2px solid #a5d7f9;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px azure;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: white;
+  font-family: "Poppins", sans-serif;
+  padding: 5px;
+  font-size: 15px;
+}
+
+.userinput:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.userinput:focus {
+  outline: none;
+  border: 1px solid #3498db;
+}
+
+/*account a tags*/
+.account {
+  text-decoration: none;
+  color: #444343;
+}
+
+.account:focus {
+  color: #3498db;
 }

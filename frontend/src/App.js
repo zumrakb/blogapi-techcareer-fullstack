@@ -7,6 +7,8 @@ import EditingCountry from "./pages/EditingCountry";
 import NotFound from "./pages/NotFound";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import UserLogin from "./pages/UserLogin";
+import UserSignup from "./pages/UserSignup";
 
 function App() {
   return (
@@ -20,6 +22,8 @@ function App() {
           path="/blog/:countryid/edit"
           element={<EditingCountry />}
         ></Route>
+        <Route path="/login" element={<UserLogin />}></Route>
+        <Route path="/signup" element={<UserSignup />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <Footer />
