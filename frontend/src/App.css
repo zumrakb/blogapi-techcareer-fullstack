@@ -1,9 +1,9 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: 'Inria Sans', sans-serif;
 }
 body {
-  font-family: "Poppins", sans-serif;
   margin: 0;
   padding: 0;
 }
@@ -16,7 +16,7 @@ body {
 
 /*here is home page styles*/
 
-.homePage {
+/* .homePage {
   padding: 0;
   margin: 0;
   display: flex;
@@ -26,32 +26,22 @@ body {
   height: 77vh;
   width: 100%;
   text-align: center;
-}
+} */
 
-header {
-  background-color: azure;
-  padding: 22px 0;
-  width: 100%;
-  text-align: center;
-  font-size: 40px;
-  font-weight: 700;
-  font-family: "Poppins", sans-serif;
-  color: #2978b5;
-}
 
 .cards {
   flex-grow: 1;
   margin: 50px 0;
   width: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 20px;
   max-width: 1300px;
 }
 
 /*here is cardComponent styles*/
 
-.cardFlag {
+/* .cardFlag {
   width: 250px;
   height: 50%;
 }
@@ -78,8 +68,9 @@ header {
 .cardComponent:hover {
   transform: scale(1.1);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
+} */
 
+/* button {
 button {
   height: 50px;
   margin: 10px;
@@ -99,180 +90,10 @@ button:hover {
   color: #fff;
   background-color: #3498db;
   border-color: azure;
-}
+} */
 
-footer {
-  background-color: azure;
-  text-align: center;
-
-  padding: 15px 0;
-  margin-top: 20px;
-  width: 100%;
-  font-size: 15px;
-  font-weight: 700;
-  font-family: "Poppins", sans-serif;
-  color: #2978b5;
-}
 
 /*here is create page styles*/
-
-.creationPage {
-  padding: 0;
-  margin: 0;
-  min-height: 100%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 50px;
-}
-
-.creationForm {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
-}
-
-.creationInput {
-  width: 500px;
-  min-height: 30px;
-  border: 2px solid #a5d7f9;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px azure;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background-color: white;
-  font-family: "Poppins", sans-serif;
-  padding: 5px;
-  font-size: 15px;
-}
-
-.creationTextarea {
-  width: 500px;
-  min-height: 25px;
-  border: 2px solid #a5d7f9;
-  border-radius: 5px;
-  box-shadow: 0 4px 8px azure;
-  transition: transform 0.3s, box-shadow 0.3s;
-  background-color: white;
-  font-family: "Poppins", sans-serif;
-  padding: 5px;
-  font-size: 15px;
-}
-
-.creationInput:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.creationInput:focus {
-  outline: none;
-  border: 1px solid #3498db;
-}
-
-.creationTextarea:hover {
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-}
-
-.creationTextarea:focus {
-  outline: none;
-  border: 1px solid #3498db;
-}
-
-.flagList {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-  gap: 10px;
-}
-
-.flagSvg {
-  width: 150px;
-  height: 75px;
-}
-
-.flagSvg:hover {
-  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
-  background-color: white;
-}
-
-/*selectedCounttry design*/
-
-.selectedCountryPage {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  width: 100%;
-  min-height: 100%;
-}
-
-.selectedCountryName {
-  color: #444343;
-}
-
-.selectedCountryDescription {
-  width: 60%;
-  text-align: center;
-  margin: 30px 0;
-  color: #444444;
-}
-
-.selectedCountryFlag {
-  width: 280px;
-}
-
-.selectedCountryFlag:hover {
-  transform: scale(1.1);
-  transition: transform 0.5s, box-shadow 0.3s;
-}
-
-.selectedCountryPageButtons {
-  margin-bottom: 20px;
-}
-
-.editingPage {
-  width: 100%;
-  min-height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.countryFlag {
-  width: 200px;
-}
-
-.editingPageTitle {
-  color: #444444;
-  margin-bottom: 15px;
-  font-size: 30px;
-
-  overflow: hidden;
-  white-space: nowrap;
-  animation: typing 4s steps(20);
-}
-
-.editingPageTitle::after {
-  content: "|";
-  animation: blink-caret 0.75s infinite;
-}
-
-@keyframes blink-caret {
-  50% {
-    opacity: 0;
-  }
-}
-
-@keyframes typing {
-  from {
-    width: 0%;
-  }
-  to {
-    width: 20%;
-  }
-}
 
 /*notfound style*/
 .error {
@@ -316,7 +137,7 @@ footer {
 }
 
 /*userloginpage*/
-.buttonshome {
+/* .buttonshome {
   display: flex;
   flex-direction: row;
 }
@@ -375,14 +196,14 @@ label {
 .userinput:focus {
   outline: none;
   border: 1px solid #3498db;
-}
+} */
 
 /*account a tags*/
-.account {
+/* .account {
   text-decoration: none;
   color: #444343;
 }
 
 .account:focus {
   color: #3498db;
-}
+} */

@@ -5,7 +5,9 @@ import { useParams } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
 import { useEffect } from "react";
-
+import "./EditingCountry.css";
+import AvatarOne from "../assets/avatarOne.png"
+import { getCountryBanner } from "../Flags";
 const EditingCountry = () => {
   const Navigate = useNavigate();
   const { countryid } = useParams();
@@ -13,7 +15,7 @@ const EditingCountry = () => {
   const [description, setDescription] = useState("");
   const [imageLink, setimageLink] = useState("");
   const isLogin = localStorage.getItem("token");
-
+  const [loading, setLoading] = useState(true);
   async function editingSubmit() {
     try {
       const newbody = {
@@ -58,6 +60,7 @@ const EditingCountry = () => {
         setTitle(countryinfo.title);
         setDescription(countryinfo.description);
         setimageLink(countryinfo.imageLink);
+        setLoading(false);
       }
       fetchCountry();
     } else Navigate("/login");
@@ -65,19 +68,48 @@ const EditingCountry = () => {
 
   return (
     <div className="editingPage">
-      <img className="countryFlag" src={imageLink} alt="flagofcountry" />
-      <h1 className="editingPageTitle">EDIT THE INFORMATION</h1>
-      <div className="creationForm">
-        <input
+      {!loading && <div className="banner">
+        <img className="banner-image" src={getCountryBanner(imageLink)} alt=""></img>
+        <div className="createdBy">
+          <div className="left">
+            <div className="left-container">
+              <input
+                className="creationInput selectedCountryName"
+                type="text"
+                placeholder="Edit the country name."
+                onChange={handleInput}
+                value={title}
+              /> 
+              <hr />
+            </div>
+
+            <img
+              className="selectedCountryFlag"
+              src={imageLink}
+              alt="flagofcountry"
+            />
+          </div>
+          <div className="right">
+            <img className="avatar" src={AvatarOne} alt="" />
+            <span>Zumra Kucubezirci</span>
+          </div>
+
+        </div>
+      </div>}
+      {/*  <img className="countryFlag" src={imageLink} alt="flagofcountry" />
+      <h1 className="editingPageTitle">EDIT THE INFORMATION</h1> */}
+      {/*  <div className="creationForm"> */}
+      {/*  <input
           className="creationInput"
           type="text"
           placeholder="Edit the country name."
           onChange={handleInput}
           value={title}
-        />
+        /> */}
+      <div className="main-content">
         <textarea
           placeholder="Edit the description."
-          className="creationTextarea"
+          className="editingTextarea"
           name="textarea"
           id="textArea"
           cols="30"
@@ -85,10 +117,15 @@ const EditingCountry = () => {
           onChange={handleTextarea}
           value={description}
         ></textarea>
-        <button onClick={editingSubmit} className="creationSubmit">
-          Save
-        </button>
+        <div className="right-content">
+          <button onClick={editingSubmit} className="editingSubmit">
+            Save
+          </button>
+        </div>
+        
       </div>
+      
+      {/* </div> */}
     </div>
   );
 };

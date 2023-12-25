@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { flags } from "../Flags";
 import axios from "axios";
+import "./Creation.css";
 
 const Creation = () => {
   const Navigate = useNavigate();
@@ -31,6 +32,8 @@ const Creation = () => {
         imageLink: imageLink,
       };
 
+      if (title === "" || description === "" || imageLink === "") return;
+
       const token = localStorage.getItem("token");
 
       await axios.post("http://localhost:5105/api/blogs", body, {
@@ -46,42 +49,64 @@ const Creation = () => {
   }
   return (
     <div className="creationPage">
+      <div className="creationTitle">
+        {" "}
+        <h2 className="creationTitleh2">Choose Your Country</h2>
+        <hr className="hr" />
+      </div>
+
       <div className="flagList">
         {flags.map((flag, id) => (
-          <img
-            key={id}
-            style={{
-              border: imageLink === flag.link ? "1px solid #3498db" : "none",
-              borderRadius: "8px",
-            }}
+          <div
+            className="box"
             onClick={() => {
               handleImg(flag.link);
             }}
-            className="flagSvg"
-            src={flag.link}
-            alt={flag.name}
-          />
+            style={{
+              backgroundImage: `url(
+                ${flag.banner}
+              )`,
+              backgroundSize: "cover",
+              border: imageLink === flag.link ? "4px solid #49b5bc" : "none",
+              borderRadius: "8px",
+            }}
+          >
+            <img key={id} className="flagSvg" src={flag.link} alt={flag.name} />{" "}
+            <h2 className="boxName">{flag.name}</h2>
+          </div>
         ))}
       </div>
+
       <div className="creationForm">
-        <input
-          className="creationInput"
-          type="text"
-          placeholder="Enter the country name."
-          onChange={handleInput}
-        />
-        <textarea
-          className="creationTextarea"
-          name="textarea"
-          id="textArea"
-          cols="30"
-          rows="10"
-          placeholder="Tell us about this country."
-          onChange={handleTextarea}
-        ></textarea>
-        <button onClick={creationSubmit} className="creationSubmit">
-          Submit
-        </button>
+        <div className="group">
+          <input
+            className="creationInput"
+            type="text"
+            placeholder="Choose Title"
+            onChange={handleInput}
+          />
+          <hr className="hr" />
+        </div>
+
+        <div className="group">
+          <h2 className="textareaWrite">Write Your Blog</h2>
+          {/* <hr className="hr" /> */}
+        </div>
+
+        <div className="textareaButton">
+          <textarea
+            className="creationTextarea"
+            name="textarea"
+            id="textArea"
+            cols="30"
+            rows="10"
+            placeholder="Tell us about this country."
+            onChange={handleTextarea}
+          ></textarea>
+          <button onClick={creationSubmit} className="creationSubmit">
+            Submit
+          </button>
+        </div>
       </div>
     </div>
   );

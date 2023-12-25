@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 
 import axios from "axios";
+import FormComponent from "../components/FormComponent";
 
 const SignupPage = () => {
   const [name, setName] = useState("");
@@ -40,47 +40,7 @@ const SignupPage = () => {
 
   return (
     <div className="userloginpage">
-      <div className="labelinput">
-        <label>Full Name</label>
-        <input
-          className="userinput"
-          type="text"
-          value={name}
-          onChange={handleName}
-        />
-      </div>
-      <div className="labelinput">
-        <label>Username/Email:</label>
-        <input
-          className="userinput"
-          type="text"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-      </div>
-      <div className="labelinput">
-        <label>Password:</label>
-        <input
-          className="userinput"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-        <label>Confirm Password:</label>
-        <input
-          className="userinput"
-          type="password"
-          value={secondpassword}
-          onChange={handleRepeatPasswordChange}
-        />
-      </div>
-
-      <button type="button" onClick={handleSignup}>
-        Sign Up
-      </button>
-      <Link to={"/login"} className="account">
-        Already have an account?
-      </Link>
+      <FormComponent name={name} handleName={handleName} username={username} password={password} handleSignup={handleSignup} handlePasswordChange={handlePasswordChange} handleUsernameChange={handleUsernameChange} handleRepeatPasswordChange={handleRepeatPasswordChange} />
     </div>
   );
 };

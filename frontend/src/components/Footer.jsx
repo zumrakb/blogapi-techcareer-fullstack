@@ -1,8 +1,11 @@
 import React from "react";
+import "./Footer.css"
 
 const Footer = () => {
+  const isLogin = localStorage.getItem("token");
   return (
-    <footer style={{ textDecoration: "none", color: "#2978b5" }}>
+    isLogin !== null &&
+    <footer>
       Made by Zümra.
     </footer>
   );

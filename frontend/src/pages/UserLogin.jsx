@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
 import axios from "axios";
-const LoginPage = () => {
+import FormComponent from "../components/FormComponent"
+import "./UserLogin.css";
+const LoginPage = ({ setUser }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const Navigate = useNavigate();
@@ -22,41 +23,17 @@ const LoginPage = () => {
       console.log(response.data);
 
       const token = response.data.token;
-
       localStorage.setItem("token", token);
       Navigate("/");
     } catch (error) {
+      setUser({});
       console.error("Login failed:", error.message);
     }
   }
 
   return (
     <div className="userloginpage">
-      <div className="labelinput">
-        <label>Username/Email:</label>
-        <input
-          className="userinput"
-          type="text"
-          value={username}
-          onChange={handleUsernameChange}
-        />
-      </div>
-      <div className="labelinput">
-        <label>Password:</label>
-        <input
-          className="userinput"
-          type="password"
-          value={password}
-          onChange={handlePasswordChange}
-        />
-      </div>
-
-      <button type="button" onClick={handleLogin}>
-        Login
-      </button>
-      <Link to={"/signup"} className="account">
-        Don't you have an account?
-      </Link>
+      <FormComponent username={username} password={password} handleLogin={handleLogin} handlePasswordChange={handlePasswordChange} handleUsernameChange={handleUsernameChange} type="Login" />
     </div>
   );
 };
